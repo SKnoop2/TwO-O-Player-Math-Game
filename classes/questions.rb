@@ -5,12 +5,4 @@ class Question
   puts "What does #{num1} plus #{num2} equal?"
   print "> "
 
-  guess = $stdin.gets.chomp
-
-  if guess.to_i != num1 + num2
-    puts "NO! That is the wrong answer. Your turn is over"
-  else
-    puts "YES! You are correct. Your turn is over"
-  end
-
 end
