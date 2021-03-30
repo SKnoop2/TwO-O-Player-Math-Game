@@ -1,6 +1,6 @@
 
-require "./classes/questions"
-require "./classes/players"
+require "./questions"
+require "./players"
 
 class Game
   attr_accessor :current_player, :player1, :player2, :question, :guess
@@ -70,6 +70,3 @@ class Game
   end
 
 end
-
-gameOne = Game.new
-puts gameOne.start
