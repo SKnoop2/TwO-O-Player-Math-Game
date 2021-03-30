@@ -15,6 +15,7 @@ class Game
     @player1 = Player.new("Player 1")
     @player2 = Player.new("Player 2")
     @current_player = @player1
+    @other_player = @player2
     @question = Question.new
   end
 
@@ -27,11 +28,33 @@ class Game
     @guess = $stdin.gets.chomp
   end
 
+  def switch_players
+    if @current_player.name == @player1.name
+      @current_player = @player2
+      @other_player = @player1
+      # puts @current_player.name
+    else 
+      @current_player = @player1
+      @other_player = @player2
+      # puts @current_player.name
+    end
+    return
+  end
+
   def check_answer
     if guess.to_i != question.num1 + question.num2
-      puts "NO! That is the wrong answer. Your turn is over"
+      puts "NO! That is the wrong answer"
+      @current_player.lives -= 1
+      if @current_player.lives == 0
+        
+        puts "#{other_player.name} wins with a score of #{other_player.lives}!"
+        puts "----- GAME OVER -----"
+      else
+        puts "P1: #{player1.lives}/3 vs P2: #{player2.lives}/3"
+      end
     else
-      puts "YES! You are correct. Your turn is over"
+      puts "YES! You are correct"
+      puts "P1: #{player1.lives}/3 vs P2: #{player2.lives}/3"
     end
   end
 
@@ -40,6 +63,7 @@ class Game
     self.ask_question
     self.player_guess
     self.check_answer
+    self.switch_players
   end
 
 end
