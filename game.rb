@@ -12,15 +12,18 @@ class Game
     @other_player = @player2
   end
 
+  #show current player's name in front of the question asked
   def ask_question
     puts "#{@current_player.name}: #{@question.show}"
   end
 
+  # allow player to guess answer to question in terminal
   def player_guess
     print "> "
     @guess = $stdin.gets.chomp
   end
 
+  # switch which player is the current player
   def switch_players
     if @current_player.name == @player1.name
       @current_player = @player2
@@ -32,13 +35,14 @@ class Game
     return
   end
 
+  # check for correct answer, print new scores and exit game if necessary
   def check_answer
     if guess.to_i != question.num1 + question.num2
-      puts "NO! That is the wrong answer"
+      puts "#{@current_player.name}: Nope! That's the wrong answer"
       @current_player.lives -= 1
       if @current_player.lives == 0
         
-        puts "#{@other_player.name} wins with a score of #{@other_player.lives}!"
+        puts "#{@other_player.name} wins with a score of #{@other_player.lives}/3!"
         puts "----- GAME OVER -----"
         puts "Good bye!"
         exit(0)
@@ -47,13 +51,13 @@ class Game
         puts "----- NEW TURN -----"
       end
     else
-      puts "YES! You are correct"
+      puts "#{@current_player.name}: YES! You are correct"
       puts "P1: #{player1.lives}/3 vs P2: #{player2.lives}/3"
       puts "----- NEW TURN -----"
     end
   end
   
-  # game starts
+  # start the game
   def start
     while self.current_player.lives > 0 do
       self.ask_question
