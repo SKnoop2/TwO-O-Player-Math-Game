@@ -6,7 +6,7 @@
   # game
 
 
-# Task 2: Roles for classes
+# Task 2: Describe Roles for classes
   # players
     # state: name
     # state: selected or unselected (ie who's turn it is)
@@ -32,3 +32,23 @@
 
   # tip: Classes shouldn't inherit things from each other?
   # tip: import / bundle items into one file and then export
+
+
+
+  guess = $stdin.gets.chomp
+if guess.to_i != num1 + num2
+  puts "NO! That is the wrong answer. Your turn is over"
+else
+  puts "YES! You are correct. Your turn is over"
+end
+
+
+  loop:
+    player x: question player x
+    input
+    player x: answer to player x guess
+    score
+    puts "----- NEW TURN -----"
+  end
+
+  switch current_player
