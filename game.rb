@@ -1,11 +1,4 @@
 
-
-
-# Define a main.rb file that will require all the other files
-# Use gets.chomp to get input from users and puts for output
-# Isolate your Input/Output logic to one or two classes. Don't allow all your classes to interact (gets/puts) with the User
-# Use puts, raise some_val.inspect, and byebug to help with debugging
-
 require "./classes/questions"
 require "./classes/players"
 
@@ -14,9 +7,9 @@ class Game
   def initialize
     @player1 = Player.new("Player 1")
     @player2 = Player.new("Player 2")
+    @question = Question.new
     @current_player = @player1
     @other_player = @player2
-    @question = Question.new
   end
 
   def ask_question
@@ -32,11 +25,9 @@ class Game
     if @current_player.name == @player1.name
       @current_player = @player2
       @other_player = @player1
-      # puts @current_player.name
     else 
       @current_player = @player1
       @other_player = @player2
-      # puts @current_player.name
     end
     return
   end
@@ -47,23 +38,29 @@ class Game
       @current_player.lives -= 1
       if @current_player.lives == 0
         
-        puts "#{other_player.name} wins with a score of #{other_player.lives}!"
+        puts "#{@other_player.name} wins with a score of #{@other_player.lives}!"
         puts "----- GAME OVER -----"
+        puts "Good bye!"
+        exit(0)
       else
         puts "P1: #{player1.lives}/3 vs P2: #{player2.lives}/3"
+        puts "----- NEW TURN -----"
       end
     else
       puts "YES! You are correct"
       puts "P1: #{player1.lives}/3 vs P2: #{player2.lives}/3"
+      puts "----- NEW TURN -----"
     end
   end
-
+  
   # game starts
   def start
-    self.ask_question
-    self.player_guess
-    self.check_answer
-    self.switch_players
+    while self.current_player.lives > 0 do
+      self.ask_question
+      self.player_guess
+      self.check_answer
+      self.switch_players
+    end
   end
 
 end

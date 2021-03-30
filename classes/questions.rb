@@ -7,7 +7,6 @@ class Question
 
   def show
     "What does #{@num1} plus #{@num2} equal?"
-    # print "> "
   end
 
 end
